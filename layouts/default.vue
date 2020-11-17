@@ -26,6 +26,7 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-spacer></v-spacer>
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-app-bar>
@@ -71,7 +72,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'Nuxt.js + Vuetify.js',
     }
   },
 }
