@@ -65,8 +65,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          title: 'Vuetify',
+          to: '/vuetify',
         },
       ],
       miniVariant: false,
