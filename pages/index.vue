@@ -6,7 +6,7 @@
         <vuetify-logo />
       </div>
       <v-card>
-        <v-card-title class="headline"> Welcome to my page </v-card-title>
+        <v-card-title class="headline justify-center">Welcome!</v-card-title>
         <v-card-text>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi,
