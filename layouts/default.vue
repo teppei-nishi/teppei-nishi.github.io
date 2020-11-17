@@ -65,8 +65,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Vuetify',
-          to: '/vuetify',
+          title: 'axios',
+          to: '/axios',
         },
       ],
       miniVariant: false,
