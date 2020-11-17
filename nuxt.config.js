@@ -62,7 +62,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'https://shibe.online',
+      target: 'http://shibe.online',
     },
   },
 
