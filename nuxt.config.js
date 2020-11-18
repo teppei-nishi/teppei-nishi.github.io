@@ -4,7 +4,7 @@ const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
         router: {
-          base: '/teppei-nishi.github.io/',
+          base: '/',
         },
       }
     : {}
@@ -57,7 +57,6 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    proxy: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
@@ -65,7 +64,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'https://shibe.online',
+      target: 'http://shibe.online',
     },
   },
 
