@@ -4,48 +4,35 @@ div
   p
     | get from
     |
-    a(href='https://shibe.online/', target='_blank')
-      | https://shibe.online/
-  ul.list
-    li(v-for='image in images')
-      img(:src='image')
+    a(href='https://randomfox.ca/floof/', target='_blank')
+      | https://randomfox.ca/floof/
+  v-card
+    v-toolbar.d-flex.justify-end
+      v-btn(icon, large, @click='getRandomFox')
+        v-icon(large) mdi-cached
+    a(:href='randomFox.link', target='_blank')
+      v-img(:src='randomFox.image')
 </template>
 
 <script>
 export default {
   data() {
     return {
-      images: [],
+      randomFox: {},
     }
   },
-  async mounted() {
-    try {
-      this.images = await this.$axios.$get('https://shibe.online/api/shibes', {
-        params: {
-          count: 10,
-          urls: true,
-          httpsUrls: true,
-        },
-      })
-    } catch (error) {}
+  mounted() {
+    this.getRandomFox()
+  },
+  methods: {
+    async getRandomFox() {
+      try {
+        this.randomFox = await this.$axios.$get('https://randomfox.ca/floof/')
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      }
+    },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.list {
-  list-style-type: none;
-  display: flex;
-  padding: 0;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  li {
-    img {
-      max-width: 100%;
-    }
-  }
-}
-</style>
