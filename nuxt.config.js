@@ -42,23 +42,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {
-    proxy: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-    baseURL: 'https://shibe.online',
-    timeout: 10000,
-    withCredentials: false,
-  },
-
-  proxy: {
-    '/api/': 'https://shibe.online',
-  },
+  axios: {},
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
