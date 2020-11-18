@@ -20,7 +20,7 @@ export default {
   },
   async mounted() {
     try {
-      this.images = await this.$axios.$get('/api/api/shibes', {
+      this.images = await this.$axios.$get('http://shibe.online/api/shibes', {
         params: {
           count: 10,
           urls: true,

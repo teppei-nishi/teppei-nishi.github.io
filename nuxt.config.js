@@ -58,14 +58,14 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     proxy: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
 
   proxy: {
     '/api': {
       target: 'http://shibe.online',
-      pathRewrite: {
-        '^/api': '/',
-      },
     },
   },
 
