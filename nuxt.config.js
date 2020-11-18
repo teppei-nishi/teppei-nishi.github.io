@@ -19,7 +19,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - nuxt-demo',
+    titleTemplate: '%s',
     title: 'nuxt-demo',
     meta: [
       { charset: 'utf-8' },
@@ -62,7 +62,10 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'https://shibe.online',
+      target: 'http://shibe.online',
+      pathRewrite: {
+        '^/api': '/',
+      },
     },
   },
 
