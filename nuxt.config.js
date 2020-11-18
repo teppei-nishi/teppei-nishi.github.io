@@ -1,16 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-const routerBase =
-  process.env.DEPLOY_ENV === 'GH_PAGES'
-    ? {
-        router: {
-          base: '/',
-        },
-      }
-    : {}
-
 export default {
-  ...routerBase,
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
@@ -64,9 +54,7 @@ export default {
   },
 
   proxy: {
-    '/api': {
-      target: 'http://shibe.online',
-    },
+    '/api/': 'https://shibe.online',
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
