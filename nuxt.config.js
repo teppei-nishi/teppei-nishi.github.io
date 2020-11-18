@@ -51,6 +51,7 @@ export default {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    withCredentials: true,
   },
 
   proxy: {
