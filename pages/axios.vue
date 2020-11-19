@@ -11,7 +11,7 @@ div
       v-btn(icon, large, @click='getRandomFox')
         v-icon(large) mdi-cached
     a(:href='randomFox.link', target='_blank')
-      v-img(:src='randomFox.image')
+      v-img(:src='randomFox.image', contain)
 </template>
 
 <script>
