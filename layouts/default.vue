@@ -70,6 +70,11 @@ export default {
           title: 'Vuex',
           to: '/vuex',
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Three.js',
+          to: '/threejs',
+        },
       ],
       miniVariant: false,
       right: true,
