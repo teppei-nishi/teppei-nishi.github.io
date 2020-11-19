@@ -1,9 +1,15 @@
-export const state = () => ({
-  count: 0,
-})
-
-export const mutations = {
-  increment(state) {
-    state.count++
+export default {
+  state: {
+    count: 0,
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    },
+  },
+  actions: {
+    increment({ commit }) {
+      commit('increment')
+    },
   },
 }
