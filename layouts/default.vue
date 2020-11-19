@@ -65,6 +65,11 @@ export default {
           title: 'axios',
           to: '/axios',
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Vuex',
+          to: '/vuex',
+        },
       ],
       miniVariant: false,
       right: true,
