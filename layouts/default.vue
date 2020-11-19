@@ -61,17 +61,17 @@ export default {
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-lan-connect',
           title: 'axios',
           to: '/axios',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-database',
           title: 'Vuex',
           to: '/vuex',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-cube-outline',
           title: 'Three.js',
           to: '/threejs',
         },

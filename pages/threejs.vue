@@ -39,6 +39,10 @@ export default {
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(window.innerWidth, window.innerHeight)
       document.querySelector('.canvas').appendChild(this.renderer.domElement)
+      this.resizeCanvas()
+      window.addEventListener('resize', () => {
+        this.resizeCanvas()
+      })
     },
     animate() {
       requestAnimationFrame(this.animate)
@@ -46,6 +50,24 @@ export default {
       this.mesh.rotation.y += 0.02
       this.renderer.render(this.scene, this.camera)
     },
+    resizeCanvas() {
+      const width = document.querySelector('.canvas').clientWidth
+      const height = document.querySelector('.canvas').clientHeight
+      this.camera.aspect = width / height
+      this.camera.updateProjectionMatrix()
+      this.renderer.setSize(width, height)
+    },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.canvas {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+</style>
