@@ -1,3 +1,5 @@
+import createPersistedState from 'vuex-persistedstate'
+
 export default {
   state: {
     count: 0,
@@ -12,4 +14,5 @@ export default {
       commit('increment')
     },
   },
+  plugins: [createPersistedState({ storage: window.sessionStorage })],
 }

@@ -1,8 +1,9 @@
 <template lang="pug">
 div
   h1 Vuex
-  div {{ count }}
-    v-btn(block, @click='increment') increment
+  .mt-2 {{ count }}
+    v-btn.mt-2(block, @click='increment') increment
+    v-btn.mt-2(block, @click='reload') reload
 </template>
 
 <script>
@@ -18,6 +19,9 @@ export default {
   methods: {
     increment() {
       this.$store.dispatch('increment')
+    },
+    reload() {
+      location.reload()
     },
   },
 }
