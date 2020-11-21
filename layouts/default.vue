@@ -80,6 +80,16 @@ export default {
           title: 'PixiJS',
           to: '/pixijs',
         },
+        {
+          icon: 'mdi-square-outline',
+          title: 'Phaser',
+          to: '/phaser',
+        },
+        {
+          icon: 'mdi-square-outline',
+          title: 'Babylon.js',
+          to: '/babylonjs',
+        },
       ],
       miniVariant: false,
       right: true,
