@@ -9,27 +9,51 @@ import * as PIXI from 'pixi.js'
 
 export default {
   data() {
-    return {}
+    return {
+      app: null,
+      bunny: null,
+    }
   },
   mounted() {
-    const app = new PIXI.Application()
-    document.querySelector('.canvas').appendChild(app.view)
-    app.loader
+    this.app = new PIXI.Application({
+      autoResize: true,
+    })
+
+    document.querySelector('.canvas').appendChild(this.app.view)
+
+    this.app.loader
       .add('bunny', require('assets/bunny.png'))
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .load((loader, resources) => {
-        const bunny = new PIXI.Sprite(resources.bunny.texture)
-        bunny.x = app.renderer.width / 2
-        bunny.y = app.renderer.height / 2
-        bunny.anchor.x = 0.5
-        bunny.anchor.y = 0.5
-        app.stage.addChild(bunny)
-        app.ticker.add(() => {
-          bunny.rotation += 0.01
+        this.bunny = new PIXI.Sprite(resources.bunny.texture)
+        this.bunny.position.set(
+          this.app.renderer.width / 2,
+          this.app.renderer.height / 2
+        )
+        this.bunny.anchor.x = 0.5
+        this.bunny.anchor.y = 0.5
+        this.app.stage.addChild(this.bunny)
+        this.app.ticker.add(() => {
+          this.bunny.rotation += 0.01
         })
       })
+    this.resize()
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
   },
-  methods: {},
+  methods: {
+    resize() {
+      const parent = this.app.view.parentNode
+      this.app.renderer.resize(parent.clientWidth, parent.clientHeight)
+      this.app.ticker.add(() => {
+        this.bunny.position.set(
+          this.app.renderer.width / 2,
+          this.app.renderer.height / 2
+        )
+      })
+    },
+  },
 }
 </script>
 
