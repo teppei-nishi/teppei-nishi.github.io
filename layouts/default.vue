@@ -75,6 +75,11 @@ export default {
           title: 'Three.js',
           to: '/threejs',
         },
+        {
+          icon: 'mdi-square-outline',
+          title: 'PixiJS',
+          to: '/pixijs',
+        },
       ],
       miniVariant: false,
       right: true,
