@@ -21,6 +21,10 @@ export default {
             gravity: { y: 200 },
           },
         },
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
+        },
         scene: {
           preload() {
             this.load.image('sky', require('assets/skies/space3.png'))
@@ -53,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.canvas {
+#parent {
   overflow: hidden;
   width: 100%;
   height: 100%;
