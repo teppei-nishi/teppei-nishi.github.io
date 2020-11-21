@@ -5,52 +5,59 @@ div
 </template>
 
 <script>
-import * as PIXI from 'pixi.js'
+import Phaser from 'phaser'
 
 export default {
   data() {
-    return {
-      app: null,
-      bunny: null,
+    return {}
+  },
+  computed: {},
+  mounted() {
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 200 },
+        },
+      },
+      scene: {
+        preload: preload,
+        create: create,
+      },
+    }
+    const game = new Phaser.Game(config)
+    function preload() {
+      // this.load.setBaseURL('http://labs.phaser.io')
+
+      this.load.image('sky', require('assets/skies/space3.png'))
+      this.load.image('logo', require('assets/sprites/phaser3-logo.png'))
+      this.load.image('red', require('assets/particles/red.png'))
+    }
+
+    function create() {
+      this.add.image(400, 300, 'sky')
+
+      const particles = this.add.particles('red')
+
+      const emitter = particles.createEmitter({
+        speed: 100,
+        scale: { start: 1, end: 0 },
+        blendMode: 'ADD',
+      })
+
+      const logo = this.physics.add.image(400, 100, 'logo')
+
+      logo.setVelocity(100, 200)
+      logo.setBounce(1, 1)
+      logo.setCollideWorldBounds(true)
+
+      emitter.startFollow(logo)
     }
   },
-  computed: {
-    canvas() {
-      return document.querySelector('.canvas')
-    },
-  },
-  mounted() {
-    this.app = new PIXI.Application()
-    this.canvas.appendChild(this.app.view)
-    this.app.loader
-      .add('bunny', require('assets/bunny.png'))
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .load((loader, resources) => {
-        this.bunny = new PIXI.Sprite(resources.bunny.texture)
-        this.bunny.anchor.x = 0.5
-        this.bunny.anchor.y = 0.5
-        this.app.stage.addChild(this.bunny)
-        this.app.ticker.add(() => {
-          this.bunny.rotation += 0.01
-          this.bunny.position.set(
-            this.app.renderer.width / 2,
-            this.app.renderer.height / 2
-          )
-        })
-      })
-    this.resize()
-    window.addEventListener('resize', () => {
-      this.resize()
-    })
-  },
-  methods: {
-    resize() {
-      this.app.renderer.resize(
-        this.canvas.clientWidth,
-        this.canvas.clientHeight
-      )
-    },
-  },
+  methods: {},
 }
 </script>
 
