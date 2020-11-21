@@ -46,7 +46,8 @@ export default {
     }
   },
   mounted() {
-    this.game = new Phaser.Game(this.config)
+    // eslint-disable-next-line no-new
+    new Phaser.Game(this.config)
   },
 }
 </script>
