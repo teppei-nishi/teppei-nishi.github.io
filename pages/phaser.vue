@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   h1 Phaser
-  v-card.mt-2.canvas
+  v-card#parent.mt-2
 </template>
 
 <script>
@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       config: {
+        parent: 'parent',
         type: Phaser.AUTO,
         width: 800,
         height: 600,
