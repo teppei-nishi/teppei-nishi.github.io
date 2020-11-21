@@ -2,6 +2,7 @@ import createPersistedState from 'vuex-persistedstate'
 
 export default {
   state: {
+    drawer: false,
     count: 0,
     modal: false,
   },
@@ -15,6 +16,9 @@ export default {
     hideModal(state) {
       state.modal = false
     },
+    toggleDrawer(state, bool) {
+      state.drawer = bool
+    },
   },
   actions: {
     increment({ commit }) {
@@ -25,6 +29,9 @@ export default {
     },
     hideModal({ commit }) {
       commit('hideModal')
+    },
+    toggleDrawer({ commit }, bool) {
+      commit('toggleDrawer', bool)
     },
   },
   plugins: [createPersistedState({ storage: window.sessionStorage })],

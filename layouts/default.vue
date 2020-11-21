@@ -3,7 +3,6 @@ v-app(dark)
   v-navigation-drawer(
     v-model='drawer',
     :mini-variant='miniVariant',
-    :clipped='clipped',
     fixed,
     app
   )
@@ -19,27 +18,20 @@ v-app(dark)
           v-icon {{ item.icon }}
         v-list-item-content
           v-list-item-title(v-text='item.title')
-  v-app-bar(:clipped-left='clipped', fixed, app)
-    v-app-bar-nav-icon(@click.stop='drawer = !drawer')
+  v-app-bar(fixed, app)
+    v-app-bar-nav-icon(@click.stop='$store.dispatch("toggleDrawer", !drawer)')
     v-spacer
     v-toolbar-title(v-text='title')
     v-spacer
   v-main
     v-container
       nuxt
-  v-navigation-drawer(v-model='rightDrawer', :right='right', temporary, fixed)
-    v-list
-      v-list-item(@click.native='right = !right')
-        v-list-item-action
-          v-icon light mdi-repeat
 </template>
 
 <script>
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
       fixed: false,
       items: [
         {
@@ -80,9 +72,18 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
       title: 'Nuxt.js + Vuetify.js',
     }
+  },
+  computed: {
+    drawer: {
+      get() {
+        return this.$store.state.drawer
+      },
+      set(newValue) {
+        this.$store.dispatch('toggleDrawer', newValue)
+      },
+    },
   },
 }
 </script>
