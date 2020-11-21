@@ -24,38 +24,29 @@ export default {
         },
       },
       scene: {
-        preload: preload,
-        create: create,
+        preload() {
+          this.load.image('sky', require('assets/skies/space3.png'))
+          this.load.image('logo', require('assets/sprites/phaser3-logo.png'))
+          this.load.image('red', require('assets/particles/red.png'))
+        },
+        create() {
+          this.add.image(400, 300, 'sky')
+          const particles = this.add.particles('red')
+          const emitter = particles.createEmitter({
+            speed: 100,
+            scale: { start: 1, end: 0 },
+            blendMode: 'ADD',
+          })
+          const logo = this.physics.add.image(400, 100, 'logo')
+          logo.setVelocity(100, 200)
+          logo.setBounce(1, 1)
+          logo.setCollideWorldBounds(true)
+          emitter.startFollow(logo)
+        },
       },
     }
-    const game = new Phaser.Game(config)
-    function preload() {
-      // this.load.setBaseURL('http://labs.phaser.io')
-
-      this.load.image('sky', require('assets/skies/space3.png'))
-      this.load.image('logo', require('assets/sprites/phaser3-logo.png'))
-      this.load.image('red', require('assets/particles/red.png'))
-    }
-
-    function create() {
-      this.add.image(400, 300, 'sky')
-
-      const particles = this.add.particles('red')
-
-      const emitter = particles.createEmitter({
-        speed: 100,
-        scale: { start: 1, end: 0 },
-        blendMode: 'ADD',
-      })
-
-      const logo = this.physics.add.image(400, 100, 'logo')
-
-      logo.setVelocity(100, 200)
-      logo.setBounce(1, 1)
-      logo.setCollideWorldBounds(true)
-
-      emitter.startFollow(logo)
-    }
+    this.game = new Phaser.Game(config)
+    console.log(this.game)
   },
   methods: {},
 }
