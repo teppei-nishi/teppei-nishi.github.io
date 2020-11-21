@@ -9,44 +9,43 @@ import Phaser from 'phaser'
 
 export default {
   data() {
-    return {}
-  },
-  computed: {},
-  mounted() {
-    const config = {
-      type: Phaser.AUTO,
-      width: 800,
-      height: 600,
-      physics: {
-        default: 'arcade',
-        arcade: {
-          gravity: { y: 200 },
+    return {
+      config: {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+          default: 'arcade',
+          arcade: {
+            gravity: { y: 200 },
+          },
         },
-      },
-      scene: {
-        preload() {
-          this.load.image('sky', require('assets/skies/space3.png'))
-          this.load.image('logo', require('assets/sprites/phaser3-logo.png'))
-          this.load.image('red', require('assets/particles/red.png'))
-        },
-        create() {
-          this.add.image(400, 300, 'sky')
-          const particles = this.add.particles('red')
-          const emitter = particles.createEmitter({
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: 'ADD',
-          })
-          const logo = this.physics.add.image(400, 100, 'logo')
-          logo.setVelocity(100, 200)
-          logo.setBounce(1, 1)
-          logo.setCollideWorldBounds(true)
-          emitter.startFollow(logo)
+        scene: {
+          preload() {
+            this.load.image('sky', require('assets/skies/space3.png'))
+            this.load.image('logo', require('assets/sprites/phaser3-logo.png'))
+            this.load.image('red', require('assets/particles/red.png'))
+          },
+          create() {
+            this.add.image(400, 300, 'sky')
+            const particles = this.add.particles('red')
+            const emitter = particles.createEmitter({
+              speed: 100,
+              scale: { start: 1, end: 0 },
+              blendMode: 'ADD',
+            })
+            const logo = this.physics.add.image(400, 100, 'logo')
+            logo.setVelocity(100, 200)
+            logo.setBounce(1, 1)
+            logo.setCollideWorldBounds(true)
+            emitter.startFollow(logo)
+          },
         },
       },
     }
-    this.game = new Phaser.Game(config)
-    console.log(this.game)
+  },
+  mounted() {
+    this.game = new Phaser.Game(this.config)
   },
   methods: {},
 }
