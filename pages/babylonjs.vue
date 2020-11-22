@@ -46,7 +46,7 @@ export default {
         scene
       )
       this.createSphere()
-      BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
+      this.createGround()
       return scene
     },
     createSphere() {
@@ -59,6 +59,9 @@ export default {
         BABYLON.Mesh.FRONTSIDE
       )
       sphere.position.y = 1
+    },
+    createGround() {
+      BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, this.scene, false)
     },
   },
 }
