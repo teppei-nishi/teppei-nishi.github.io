@@ -9,22 +9,42 @@ div
 import * as BABYLON from 'babylonjs'
 
 export default {
+  data() {
+    return {
+      engine: null,
+      scene: null,
+    }
+  },
+  computed: {
+    canvas() {
+      return document.getElementById('renderCanvas')
+    },
+  },
   mounted() {
-    const canvas = document.getElementById('renderCanvas')
-    const engine = new BABYLON.Engine(canvas, true, {
+    this.engine = new BABYLON.Engine(this.canvas, true, {
       preserveDrawingBuffer: true,
       stencil: true,
     })
-    const createScene = function () {
-      const scene = new BABYLON.Scene(engine)
+    this.scene = this.createScene()
+    this.engine.runRenderLoop(() => {
+      this.scene.render()
+    })
+    window.addEventListener('resize', () => {
+      this.engine.resize()
+    })
+  },
+  methods: {
+    createScene() {
+      const scene = new BABYLON.Scene(this.engine)
       const camera = new BABYLON.FreeCamera(
         'camera1',
         new BABYLON.Vector3(0, 5, -10),
         scene
       )
       camera.setTarget(BABYLON.Vector3.Zero())
-      camera.attachControl(canvas, false)
-      const light = new BABYLON.HemisphericLight(
+      camera.attachControl(this.canvas, false)
+      // eslint-disable-next-line no-new
+      new BABYLON.HemisphericLight(
         'light1',
         new BABYLON.Vector3(0, 1, 0),
         scene
@@ -38,18 +58,10 @@ export default {
         BABYLON.Mesh.FRONTSIDE
       )
       sphere.position.y = 1
-      const ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
+      BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
       return scene
-    }
-    const scene = createScene()
-    engine.runRenderLoop(function () {
-      scene.render()
-    })
-    window.addEventListener('resize', function () {
-      engine.resize()
-    })
+    },
   },
-  methods: {},
 }
 </script>
 
