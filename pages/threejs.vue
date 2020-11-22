@@ -1,23 +1,14 @@
 <template lang="pug">
 div
   h1 Three.js
-  v-card.mt-2.canvas
+  v-card.mt-2.card
+    .canvas
 </template>
 
 <script>
 import * as THREE from 'three'
 
 export default {
-  data() {
-    return {
-      camera: null,
-      scene: null,
-      renderer: null,
-      geometry: null,
-      material: null,
-      mesh: null,
-    }
-  },
   mounted() {
     this.init()
     this.animate()
@@ -62,12 +53,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+
 .canvas {
-  overflow: hidden;
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
