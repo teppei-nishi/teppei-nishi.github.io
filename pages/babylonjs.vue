@@ -13,6 +13,7 @@ export default {
     return {
       engine: null,
       scene: null,
+      camera: null,
     }
   },
   computed: {
@@ -36,13 +37,13 @@ export default {
   methods: {
     createScene() {
       const scene = new BABYLON.Scene(this.engine)
-      const camera = new BABYLON.FreeCamera(
+      this.camera = new BABYLON.FreeCamera(
         'camera1',
         new BABYLON.Vector3(0, 5, -10),
         scene
       )
-      camera.setTarget(BABYLON.Vector3.Zero())
-      camera.attachControl(this.canvas, false)
+      this.camera.setTarget(BABYLON.Vector3.Zero())
+      this.camera.attachControl(this.canvas, false)
       // eslint-disable-next-line no-new
       new BABYLON.HemisphericLight(
         'light1',
