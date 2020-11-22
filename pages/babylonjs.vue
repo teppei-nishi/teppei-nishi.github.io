@@ -1,66 +1,72 @@
 <template lang="pug">
 div
   h1 Babylon.js
-  v-card.mt-2.canvas
+  v-card.mt-2.card
+    canvas#renderCanvas
 </template>
 
 <script>
-import * as PIXI from 'pixi.js'
+import * as BABYLON from 'babylonjs'
 
 export default {
-  data() {
-    return {
-      app: null,
-      bunny: null,
-    }
-  },
-  computed: {
-    canvas() {
-      return document.querySelector('.canvas')
-    },
-  },
   mounted() {
-    this.app = new PIXI.Application()
-    this.canvas.appendChild(this.app.view)
-    this.app.loader
-      .add('bunny', require('assets/bunny.png'))
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .load((loader, resources) => {
-        this.bunny = new PIXI.Sprite(resources.bunny.texture)
-        this.bunny.anchor.x = 0.5
-        this.bunny.anchor.y = 0.5
-        this.app.stage.addChild(this.bunny)
-        this.app.ticker.add(() => {
-          this.bunny.rotation += 0.01
-          this.bunny.position.set(
-            this.app.renderer.width / 2,
-            this.app.renderer.height / 2
-          )
-        })
-      })
-    this.resize()
-    window.addEventListener('resize', () => {
-      this.resize()
+    const canvas = document.getElementById('renderCanvas')
+    const engine = new BABYLON.Engine(canvas, true, {
+      preserveDrawingBuffer: true,
+      stencil: true,
+    })
+    const createScene = function () {
+      const scene = new BABYLON.Scene(engine)
+      const camera = new BABYLON.FreeCamera(
+        'camera1',
+        new BABYLON.Vector3(0, 5, -10),
+        scene
+      )
+      camera.setTarget(BABYLON.Vector3.Zero())
+      camera.attachControl(canvas, false)
+      const light = new BABYLON.HemisphericLight(
+        'light1',
+        new BABYLON.Vector3(0, 1, 0),
+        scene
+      )
+      const sphere = BABYLON.Mesh.CreateSphere(
+        'sphere1',
+        16,
+        2,
+        scene,
+        false,
+        BABYLON.Mesh.FRONTSIDE
+      )
+      sphere.position.y = 1
+      const ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
+      return scene
+    }
+    const scene = createScene()
+    engine.runRenderLoop(function () {
+      scene.render()
+    })
+    window.addEventListener('resize', function () {
+      engine.resize()
     })
   },
-  methods: {
-    resize() {
-      this.app.renderer.resize(
-        this.canvas.clientWidth,
-        this.canvas.clientHeight
-      )
-    },
-  },
+  methods: {},
 }
 </script>
 
 <style lang="scss" scoped>
-.canvas {
-  overflow: hidden;
+.card {
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+#renderCanvas {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
 }
 </style>
