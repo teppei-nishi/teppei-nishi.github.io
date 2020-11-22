@@ -19,9 +19,13 @@ export default {
       preserveDrawingBuffer: true,
       stencil: true,
     })
-    const scene = this.createScene()
+    this.createScene()
+    this.createCamera()
+    this.createLight()
+    this.createSphere()
+    this.createGround()
     this.engine.runRenderLoop(() => {
-      scene.render()
+      this.scene.render()
     })
     window.addEventListener('resize', () => {
       this.engine.resize()
@@ -29,12 +33,7 @@ export default {
   },
   methods: {
     createScene() {
-      const scene = new BABYLON.Scene(this.engine)
-      this.createCamera()
-      this.createLight()
-      this.createSphere()
-      this.createGround()
-      return scene
+      this.scene = new BABYLON.Scene(this.engine)
     },
     createCamera() {
       const camera = new BABYLON.ArcRotateCamera(
