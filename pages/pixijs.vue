@@ -1,26 +1,23 @@
 <template lang="pug">
 div
   h1 PixiJS
-  v-card.mt-2.canvas
+  v-card.mt-2.card
+    .canvas
 </template>
 
 <script>
 import * as PIXI from 'pixi.js'
 
 export default {
-  data() {
-    return {
-      app: null,
-      bunny: null,
-    }
-  },
   computed: {
+    app() {
+      return new PIXI.Application()
+    },
     canvas() {
       return document.querySelector('.canvas')
     },
   },
   mounted() {
-    this.app = new PIXI.Application()
     this.canvas.appendChild(this.app.view)
     this.app.loader
       .add('bunny', require('assets/bunny.png'))
@@ -55,12 +52,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+
 .canvas {
-  overflow: hidden;
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
