@@ -15,10 +15,7 @@ export default {
     },
   },
   mounted() {
-    this.engine = new BABYLON.Engine(this.canvas, true, {
-      preserveDrawingBuffer: true,
-      stencil: true,
-    })
+    this.createEngine()
     this.createScene()
     this.createCamera()
     this.createLight()
@@ -32,6 +29,12 @@ export default {
     })
   },
   methods: {
+    createEngine() {
+      this.engine = new BABYLON.Engine(this.canvas, true, {
+        preserveDrawingBuffer: true,
+        stencil: true,
+      })
+    },
     createScene() {
       this.scene = new BABYLON.Scene(this.engine)
     },
