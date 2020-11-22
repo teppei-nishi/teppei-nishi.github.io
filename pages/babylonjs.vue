@@ -45,17 +45,20 @@ export default {
         new BABYLON.Vector3(0, 1, 0),
         scene
       )
+      this.createSphere()
+      BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
+      return scene
+    },
+    createSphere() {
       const sphere = BABYLON.Mesh.CreateSphere(
         'sphere1',
         16,
         2,
-        scene,
+        this.scene,
         false,
         BABYLON.Mesh.FRONTSIDE
       )
       sphere.position.y = 1
-      BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene, false)
-      return scene
     },
   },
 }
