@@ -1,7 +1,8 @@
 <template lang="pug">
 div
   h1 Phaser
-  v-card#parent.mt-2
+  v-card.card.mt-2
+    #parent
 </template>
 
 <script>
@@ -57,12 +58,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 75%;
+}
+
 #parent {
   overflow: hidden;
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
   line-height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
