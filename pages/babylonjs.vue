@@ -30,24 +30,30 @@ export default {
   methods: {
     createScene() {
       const scene = new BABYLON.Scene(this.engine)
-      this.camera = new BABYLON.ArcRotateCamera(
+      this.createCamera()
+      this.createLight()
+      this.createSphere()
+      this.createGround()
+      return scene
+    },
+    createCamera() {
+      const camera = new BABYLON.ArcRotateCamera(
         'Camera',
         0,
         1,
         10,
         new BABYLON.Vector3(0, 0, 0),
-        scene
+        this.scene
       )
-      this.camera.attachControl(this.canvas, false)
+      camera.attachControl(this.canvas, false)
+    },
+    createLight() {
       // eslint-disable-next-line no-new
       new BABYLON.HemisphericLight(
         'light1',
         new BABYLON.Vector3(0, 1, 0),
-        scene
+        this.scene
       )
-      this.createSphere()
-      this.createGround()
-      return scene
     },
     createSphere() {
       const sphere = BABYLON.Mesh.CreateSphere(
