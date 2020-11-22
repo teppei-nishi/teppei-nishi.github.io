@@ -13,10 +13,17 @@ export default {
     canvas() {
       return document.getElementById('renderCanvas')
     },
+    engine() {
+      return new BABYLON.Engine(this.canvas, true, {
+        preserveDrawingBuffer: true,
+        stencil: true,
+      })
+    },
+    scene() {
+      return new BABYLON.Scene(this.engine)
+    },
   },
   mounted() {
-    this.createEngine()
-    this.createScene()
     this.createCamera()
     this.createLight()
     this.createSphere()
@@ -29,15 +36,6 @@ export default {
     })
   },
   methods: {
-    createEngine() {
-      this.engine = new BABYLON.Engine(this.canvas, true, {
-        preserveDrawingBuffer: true,
-        stencil: true,
-      })
-    },
-    createScene() {
-      this.scene = new BABYLON.Scene(this.engine)
-    },
     createCamera() {
       const camera = new BABYLON.ArcRotateCamera(
         'Camera',
