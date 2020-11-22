@@ -9,13 +9,6 @@ div
 import * as BABYLON from 'babylonjs'
 
 export default {
-  data() {
-    return {
-      engine: null,
-      scene: null,
-      camera: null,
-    }
-  },
   computed: {
     canvas() {
       return document.getElementById('renderCanvas')
@@ -26,9 +19,9 @@ export default {
       preserveDrawingBuffer: true,
       stencil: true,
     })
-    this.scene = this.createScene()
+    const scene = this.createScene()
     this.engine.runRenderLoop(() => {
-      this.scene.render()
+      scene.render()
     })
     window.addEventListener('resize', () => {
       this.engine.resize()
@@ -37,12 +30,14 @@ export default {
   methods: {
     createScene() {
       const scene = new BABYLON.Scene(this.engine)
-      this.camera = new BABYLON.FreeCamera(
-        'camera1',
-        new BABYLON.Vector3(0, 5, -10),
+      this.camera = new BABYLON.ArcRotateCamera(
+        'Camera',
+        0,
+        1,
+        10,
+        new BABYLON.Vector3(0, 0, 0),
         scene
       )
-      this.camera.setTarget(BABYLON.Vector3.Zero())
       this.camera.attachControl(this.canvas, false)
       // eslint-disable-next-line no-new
       new BABYLON.HemisphericLight(
