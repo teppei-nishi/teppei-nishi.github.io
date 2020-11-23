@@ -7,29 +7,30 @@ div
 
 <script>
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export default {
+  computed: {
+    canvas() {
+      return document.querySelector('.canvas')
+    },
+  },
   mounted() {
     this.init()
     this.animate()
   },
   methods: {
     init() {
-      this.camera = new THREE.PerspectiveCamera(
-        70,
-        window.innerWidth / window.innerHeight,
-        0.01,
-        10
-      )
-      this.camera.position.z = 1
       this.scene = new THREE.Scene()
-      this.geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+      this.geometry = new THREE.BoxGeometry(1, 1, 1)
       this.material = new THREE.MeshNormalMaterial()
       this.mesh = new THREE.Mesh(this.geometry, this.material)
       this.scene.add(this.mesh)
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(window.innerWidth, window.innerHeight)
-      document.querySelector('.canvas').appendChild(this.renderer.domElement)
+      this.createCamera()
+      this.canvas.appendChild(this.renderer.domElement)
+      this.renderer.domElement.style.outline = 'none'
       this.resizeCanvas()
       window.addEventListener('resize', () => {
         this.resizeCanvas()
@@ -47,6 +48,19 @@ export default {
       this.camera.aspect = width / height
       this.camera.updateProjectionMatrix()
       this.renderer.setSize(width, height)
+    },
+    createCamera() {
+      this.camera = new THREE.PerspectiveCamera(
+        70,
+        window.innerWidth / window.innerHeight,
+        0.01,
+        10
+      )
+      this.camera.position.z = 5
+      const controls = new OrbitControls(this.camera, this.renderer.domElement)
+      controls.enablePan = false
+      controls.minDistance = 1
+      controls.maxDistance = 10
     },
   },
 }
