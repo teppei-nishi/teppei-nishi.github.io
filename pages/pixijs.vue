@@ -16,6 +16,7 @@ export default {
     app() {
       return new PIXI.Application({
         backgroundColor: '0x1099bb',
+        // transparent: true,
       })
     },
     container() {
@@ -26,14 +27,14 @@ export default {
     this.canvas.appendChild(this.app.view)
     this.app.stage.addChild(this.container)
     const texture = PIXI.Texture.from(require('assets/bunny.png'))
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 100; i++) {
       const bunny = new PIXI.Sprite(texture)
       bunny.anchor.set(0.5)
-      bunny.x = (i % 5) * 40
-      bunny.y = Math.floor(i / 5) * 40
+      bunny.x = (i % 10) * 50
+      bunny.y = Math.floor(i / 10) * 50
+      bunny.tint = Math.random() * '0xffffff'
       this.container.addChild(bunny)
     }
-
     this.container.pivot.x = this.container.width / 2
     this.container.pivot.y = this.container.height / 2
     this.app.ticker.add((delta) => {
