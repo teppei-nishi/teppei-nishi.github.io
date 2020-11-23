@@ -10,7 +10,7 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "npm run lint:js && npm run lint:style",
-    "dep": "cpush-dir --dir=dist --branch=gh-pages --cleanup",
+    "dep": "push-dir --dir=dist --branch=gh-pages --cleanup",
     "deploy": "concurrently \"npm run generate\" \"npm run dep\""
   },
   "dependencies": {
