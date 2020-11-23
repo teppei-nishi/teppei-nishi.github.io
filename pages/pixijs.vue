@@ -13,9 +13,6 @@ export default {
     canvas() {
       return document.querySelector('.canvas')
     },
-    container() {
-      return new PIXI.Container()
-    },
     app() {
       return new PIXI.Application({
         width: 800,
@@ -23,6 +20,9 @@ export default {
         backgroundColor: '0x1099bb',
         resolution: window.devicePixelRatio || 1,
       })
+    },
+    container() {
+      return new PIXI.Container()
     },
   },
   mounted() {
