@@ -10,31 +10,41 @@ import * as PIXI from 'pixi.js'
 
 export default {
   computed: {
-    app() {
-      return new PIXI.Application()
-    },
     canvas() {
       return document.querySelector('.canvas')
+    },
+    container() {
+      return new PIXI.Container()
+    },
+    app() {
+      return new PIXI.Application({
+        width: 800,
+        height: 600,
+        backgroundColor: '0x1099bb',
+        resolution: window.devicePixelRatio || 1,
+      })
     },
   },
   mounted() {
     this.canvas.appendChild(this.app.view)
-    this.app.loader
-      .add('bunny', require('assets/bunny.png'))
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .load((loader, resources) => {
-        this.bunny = new PIXI.Sprite(resources.bunny.texture)
-        this.bunny.anchor.x = 0.5
-        this.bunny.anchor.y = 0.5
-        this.app.stage.addChild(this.bunny)
-        this.app.ticker.add(() => {
-          this.bunny.rotation += 0.01
-          this.bunny.position.set(
-            this.app.renderer.width / 2,
-            this.app.renderer.height / 2
-          )
-        })
-      })
+    this.app.stage.addChild(this.container)
+    const texture = PIXI.Texture.from(require('assets/bunny.png'))
+    for (let i = 0; i < 25; i++) {
+      const bunny = new PIXI.Sprite(texture)
+      bunny.anchor.set(0.5)
+      bunny.x = (i % 5) * 40
+      bunny.y = Math.floor(i / 5) * 40
+      this.container.addChild(bunny)
+    }
+
+    this.container.pivot.x = this.container.width / 2
+    this.container.pivot.y = this.container.height / 2
+    this.app.ticker.add((delta) => {
+      this.container.x = this.app.screen.width / 2
+      this.container.y = this.app.screen.height / 2
+      this.container.rotation -= 0.01 * delta
+    })
+
     this.resize()
     window.addEventListener('resize', () => {
       this.resize()
@@ -55,7 +65,7 @@ export default {
 .card {
   width: 100%;
   height: 0;
-  padding-top: 56.25%;
+  padding-top: 75%;
 }
 
 .canvas {
