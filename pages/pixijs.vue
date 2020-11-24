@@ -43,6 +43,16 @@ export default {
       this.container.y = this.app.screen.height / 2
       this.container.rotation -= 0.01 * delta
     })
+    this.resizeContainer()
+    window.addEventListener('resize', () => {
+      this.resizeContainer()
+    })
+  },
+  methods: {
+    resizeContainer() {
+      const ratio = this.canvas.clientWidth / 800
+      this.container.scale.set(ratio)
+    },
   },
 }
 </script>
