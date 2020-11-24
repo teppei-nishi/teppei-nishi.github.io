@@ -17,6 +17,7 @@ export default {
       return new PIXI.Application({
         backgroundColor: '0x1099bb',
         // transparent: true,
+        resizeTo: this.canvas,
       })
     },
     container() {
@@ -42,19 +43,6 @@ export default {
       this.container.y = this.app.screen.height / 2
       this.container.rotation -= 0.01 * delta
     })
-
-    this.resize()
-    window.addEventListener('resize', () => {
-      this.resize()
-    })
-  },
-  methods: {
-    resize() {
-      this.app.renderer.resize(
-        this.canvas.clientWidth,
-        this.canvas.clientHeight
-      )
-    },
   },
 }
 </script>
