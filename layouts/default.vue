@@ -69,6 +69,11 @@ export default {
           title: 'Babylon.js',
           to: '/babylonjs',
         },
+        {
+          icon: 'mdi-menu',
+          title: 'Accordion',
+          to: '/accordion',
+        },
       ],
       miniVariant: false,
       right: true,
