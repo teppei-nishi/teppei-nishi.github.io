@@ -2,32 +2,33 @@
 div
   h2 Animated Accordion
   p Click on the buttons to open the collapsible content.
-  button.accordion Section 1
+  .accordion(@click='toggleAccordion')
+    | Section 1
   .panel
     p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  button.accordion Section 2
+  .accordion(@click='toggleAccordion')
+    | Section 2
   .panel
     p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  button.accordion Section 3
+  .accordion(@click='toggleAccordion')
+    | Section 3
   .panel
     p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 </template>
 
 <script>
 export default {
-  mounted() {
-    const acc = document.getElementsByClassName('accordion')
-    for (let i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        const panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
-    }
+  methods: {
+    toggleAccordion(e) {
+      const el = e.target
+      el.classList.toggle('active')
+      const panel = el.nextElementSibling
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px'
+      }
+    },
   },
 }
 </script>
