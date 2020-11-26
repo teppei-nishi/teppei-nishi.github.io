@@ -1,7 +1,6 @@
 <template lang="pug">
 div
-  h2 Animated Accordion
-  p Click on the buttons to open the collapsible content.
+  h1 Accordion
   BaseAccordion(
     v-for='item in accordions',
     :key='item.id',
