@@ -43,8 +43,8 @@ export default {
       this.renderer.render(this.scene, this.camera)
     },
     resizeCanvas() {
-      const width = document.querySelector('.canvas').clientWidth
-      const height = document.querySelector('.canvas').clientHeight
+      const width = this.canvas.clientWidth
+      const height = this.canvas.clientHeight
       this.camera.aspect = width / height
       this.camera.updateProjectionMatrix()
       this.renderer.setSize(width, height)
