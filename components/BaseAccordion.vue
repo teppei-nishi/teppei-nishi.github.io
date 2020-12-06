@@ -37,6 +37,7 @@ export default {
   outline: none;
   font-size: 15px;
   transition: 0.4s;
+  user-select: none;
 
   &:hover {
     background-color: #ccc;
