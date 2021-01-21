@@ -1,5 +1,7 @@
 # nuxt-demo
 
+https://teppei-nishi.github.io/
+
 ## Build Setup
 
 ```bash
