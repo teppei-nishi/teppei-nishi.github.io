@@ -24,10 +24,10 @@ export default {
         rootMargin: '0px',
         threshold: 0.5,
       }
-      const observer = new IntersectionObserver(this.callback, options)
+      const observer = new IntersectionObserver(this.handleIntersect, options)
       observer.observe(this.target)
     },
-    callback(entries, observer) {
+    handleIntersect(entries, observer) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           anime({
