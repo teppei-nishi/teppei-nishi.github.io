@@ -74,6 +74,11 @@ export default {
           title: 'Accordion',
           to: '/accordion',
         },
+        {
+          icon: 'mdi-animation',
+          title: 'anime.js',
+          to: '/animejs',
+        },
       ],
       miniVariant: false,
       right: true,

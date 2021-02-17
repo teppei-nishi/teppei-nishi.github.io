@@ -36,6 +36,12 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    [
+      '@nuxtjs/eslint-module',
+      {
+        fix: true,
+      },
+    ],
   ],
 
   stylelint: {
